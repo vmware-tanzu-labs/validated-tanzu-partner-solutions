@@ -1,0 +1,14 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+#@overlay/match by=overlay.all, expects="1+"
+---
+spec:
+  redisEnterpriseImageSpec:
+    #@overlay/replace via=lambda left, right: right+left
+    repository: #@ data.values.imageRegistry
+  redisEnterpriseServicesRiggerImageSpec:
+    #@overlay/replace via=lambda left, right: right+left
+    repository: #@ data.values.imageRegistry
+  bootstrapperImageSpec:
+    #@overlay/replace via=lambda left, right: right+left
+    repository: #@ data.values.imageRegistry

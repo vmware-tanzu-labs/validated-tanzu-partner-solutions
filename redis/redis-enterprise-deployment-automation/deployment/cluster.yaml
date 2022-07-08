@@ -1,0 +1,35 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: app.redislabs.com/v1
+kind: RedisEnterpriseCluster
+metadata:
+  name: #@ data.values.cluster.name
+  annotations:
+    kapp.k14s.io/update-strategy: skip
+spec:
+  nodes: #@ data.values.cluster.nodes
+  license: #@ data.values.license
+  redisEnterpriseNodeResources:
+    limits:
+      cpu: "2"
+      memory: 4Gi
+    requests:
+      cpu: "2"
+      memory: 4Gi
+  persistentSpec:
+    enabled: true
+    volumeSize: 2Gi
+  redisEnterpriseImageSpec:
+    imagePullPolicy: IfNotPresent
+    repository:      redislabs/redis
+    versionTag:      6.2.10-90
+  redisEnterpriseServicesRiggerImageSpec:
+    imagePullPolicy: IfNotPresent
+    repository:      redislabs/k8s-controller
+    versionTag:      6.2.10-4
+  bootstrapperImageSpec:
+    imagePullPolicy: IfNotPresent
+    repository:      redislabs/operator
+    versionTag:      6.2.10-4
+  uiServiceType: LoadBalancer
+  username: #@ data.values.cluster.adminUsername

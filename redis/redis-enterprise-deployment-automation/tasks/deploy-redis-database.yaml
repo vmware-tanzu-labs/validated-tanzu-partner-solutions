@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: deploy-redis-database
+spec:
+  params:
+  - name: image
+    type: string
+
+  workspaces:
+  - name: cluster
+  - name: values
+
+  steps:
+  - name: deploy-redis-database
+    image: "$(params.image)"
+    script: |
+      #!/usr/bin/env bash
+      export KUBECONFIG="$(workspaces.cluster.path)/kubeconfig.yaml"
+      cd /automation
+      pipeline-scripts/deploy-redis-database.sh "$(workspaces.values.path)/values.yaml"

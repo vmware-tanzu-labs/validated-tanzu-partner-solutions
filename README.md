@@ -1,22 +1,6 @@
-# validated-tanzu-partner-solutions
+# Validated Tanzu Partner Solutions
 
-## Overview
-
-## Try it out
-
-### Prerequisites
-
-* Prereq 1
-* Prereq 2
-* Prereq 3
-
-### Build & Run
-
-1. Step 1
-2. Step 2
-3. Step 3
-
-## Documentation
+This repository contains work done by the VMware Tanzu Partner Engineering team to support partner integrations with VMware Tanzu.
 
 ## Contributing
 

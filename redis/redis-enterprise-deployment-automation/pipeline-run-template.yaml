@@ -1,0 +1,29 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: deploy-redis-
+spec:
+  pipelineRef:
+    name: deploy-redis
+  params:
+  - name: pipeline-image
+    value: #@ data.values.image
+  - name: values-repo-url
+    value: #@ data.values.repo
+  workspaces:
+  - name: cluster
+    secret:
+      secretName: target-cluster
+  - name: values
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Mi
+  - name: values-repository-secret
+    secret:
+      secretName: values-repository-secret

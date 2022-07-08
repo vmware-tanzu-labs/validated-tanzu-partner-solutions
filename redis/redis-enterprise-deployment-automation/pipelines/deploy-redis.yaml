@@ -1,0 +1,87 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: deploy-redis
+spec:
+  description: Deploys Redis into an existing cluster
+  params:
+  - name: values-repo-url
+    type: string
+    description: The git repository URL that holds the values.
+  - name: pipeline-image
+    type: string
+    description: The image that contains the pipeline code
+
+  workspaces:
+  - name: cluster
+  - name: values
+  - name: values-repository-secret
+
+  tasks:
+  - name: fetch-values-repository
+    taskRef:
+      name: git-clone
+    workspaces:
+    - name: ssh-directory
+      workspace: values-repository-secret
+    - name: output
+      workspace: values
+    params:
+    - name: url
+      value: $(params.values-repo-url)
+
+  - name: deploy-redis-operator
+    taskRef:
+      name: deploy-redis-operator
+    runAfter:
+      - fetch-values-repository
+    params:
+    - name: image
+      value: $(params.pipeline-image)
+    workspaces:
+    - name: cluster
+      workspace: cluster
+    - name: values
+      workspace: values
+
+  - name: deploy-redis-cluster
+    taskRef:
+      name: deploy-redis-cluster
+    runAfter:
+      - deploy-redis-operator
+    params:
+    - name: image
+      value: $(params.pipeline-image)
+    workspaces:
+    - name: cluster
+      workspace: cluster
+    - name: values
+      workspace: values
+
+  - name: deploy-redis-admission-controller
+    taskRef:
+      name: deploy-redis-admission-controller
+    runAfter:
+      - deploy-redis-cluster
+    params:
+    - name: image
+      value: $(params.pipeline-image)
+    workspaces:
+    - name: cluster
+      workspace: cluster
+    - name: values
+      workspace: values
+
+  - name: deploy-redis-database
+    taskRef:
+      name: deploy-redis-database
+    runAfter:
+      - deploy-redis-admission-controller
+    params:
+    - name: image
+      value: $(params.pipeline-image)
+    workspaces:
+    - name: cluster
+      workspace: cluster
+    - name: values
+      workspace: values

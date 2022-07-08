@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: deploy-redis-
+spec:
+  pipelineRef:
+    name: deploy-redis
+  params:
+  - name: pipeline-image
+    value: harbor-repo.vmware.com/pwall/redis_automation:latest
+  - name: values-repo-url
+    value: git@gitlab.eng.vmware.com:pwall/redis-values.git
+  workspaces:
+  - name: cluster
+    secret:
+      secretName: target-cluster
+  - name: values
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Mi
+  - name: values-repository-secret
+    secret:
+      secretName: values-repository-secret

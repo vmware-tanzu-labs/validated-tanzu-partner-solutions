@@ -1,0 +1,38 @@
+---
+# This tells kapp how to wait until the cluster has been fully set up
+# Not yet available in kapp, waiting for this PR: https://github.com/vmware-tanzu/carvel-kapp/pull/475
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+waitRules:
+- resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: app.redislabs.com/v1alpha1, kind: RedisEnterpriseCluster}
+  ytt:
+    funcContractV1:
+      resource.star: |
+        def is_done(resource):
+          state = resource.status.state
+          if state == "PendingCreation":
+            return {"done": False, "message": "cluster in "+state+" state"}
+          if state == "BootstrappingFirstPod":
+            return {"done": False, "message": "cluster in "+state+" state"}
+          if state == "Initializing":
+            return {"done": False, "message": "cluster in "+state+" state"}
+          if state == "RecoveryReset":
+            return {"done": False, "message": "cluster in "+state+" state"}
+          if state == "RecoveringFirstPod":
+            return {"done": False, "message": "cluster in "+state+" state"}
+          if state == "ClusterRecreating":
+            return {"done": False, "message": "cluster in "+state+" state"}
+
+          if state == "Running":
+            return {"done": True, "successful": True, "message": ""}
+          if state == "Error":
+            return {"done": True, "successful": False, "message": "cluster in Error state"}
+          if state == "Invalid":
+            return {"done": True, "successful": False, "message": "cluster in Invalid state"}
+          if state == "InvalidUpgrade":
+            return {"done": True, "successful": False, "message": "cluster in InvalidUpgrade state"}
+
+          return {"done": False, "message": "cluster in unknown state: "+state}
+          end
+        end

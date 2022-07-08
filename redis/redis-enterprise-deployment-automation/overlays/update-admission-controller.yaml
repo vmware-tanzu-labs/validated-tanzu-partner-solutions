@@ -1,0 +1,13 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+#@overlay/match by=overlay.all, expects="1+"
+---
+webhooks:
+#@overlay/match by=overlay.all, expects="1+"
+-
+  clientConfig:
+    #@overlay/replace
+    caBundle: #@ data.values.cert
+    service:
+      #@overlay/replace
+      namespace: #@ data.values.namespace

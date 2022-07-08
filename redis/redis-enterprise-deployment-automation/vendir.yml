@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: vendor
+  contents:
+  - path: redis
+    git:
+      url: https://github.com/RedisLabs/redis-enterprise-k8s-docs
+      ref: 6.2.10-4
+  - path: redisbank
+    git:
+      url: https://github.com/redis-developer/redisbank
+      ref: main

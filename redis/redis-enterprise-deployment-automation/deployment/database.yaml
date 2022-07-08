@@ -1,0 +1,14 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: app.redislabs.com/v1alpha1
+kind: RedisEnterpriseDatabase
+metadata:
+  name: #@ data.values.database.name
+  annotations:
+    kapp.k14s.io/update-strategy: skip
+spec:
+  memorySize: #@ data.values.database.memorySize
+  persistence: #@ data.values.database.persistence
+  redisEnterpriseCluster:
+    name: #@ data.values.cluster.name
+  modulesList: #@ data.values.database.modules

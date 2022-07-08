@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: deploy-redis-operator
+spec:
+  params:
+  - name: image
+    type: string
+
+  workspaces:
+  - name: cluster
+  - name: values
+
+  steps:
+  - name: deploy-redis-operator
+    image: "$(params.image)"
+    script: |
+      #!/usr/bin/env bash
+      export KUBECONFIG="$(workspaces.cluster.path)/kubeconfig.yaml"
+      cd /automation
+      pipeline-scripts/deploy-redis-operator.sh "$(workspaces.values.path)/values.yaml"

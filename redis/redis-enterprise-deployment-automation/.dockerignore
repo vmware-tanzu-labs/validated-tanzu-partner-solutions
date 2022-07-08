@@ -1,0 +1,8 @@
+.dockerignore
+.git
+pipelines
+scripts
+tasks
+Dockerfile
+Makefile
+README.md

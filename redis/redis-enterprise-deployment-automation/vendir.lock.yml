@@ -1,0 +1,17 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: 'Merge pull request #218 from RedisLabs/6.2.10-4...'
+      sha: c54156edff0f2ef57113b92fe713786fc86a985b
+      tags:
+      - 6.2.10-4
+    path: redis
+  - git:
+      commitTitle: Update marketplace.json
+      sha: 3a6227397167d0359f7d113b575c30e64aa5f9af
+      tags:
+      - 1.0.0-38-g3a62273
+    path: redisbank
+  path: vendor
+kind: LockConfig

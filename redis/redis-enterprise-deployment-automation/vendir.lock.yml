@@ -2,10 +2,10 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Merge pull request #218 from RedisLabs/6.2.10-4...'
-      sha: c54156edff0f2ef57113b92fe713786fc86a985b
+      commitTitle: 'Merge pull request #237 from RedisLabs/6.2.10-45...'
+      sha: ff6181d9d851619160393c0bde7f54e6113f42b5
       tags:
-      - 6.2.10-4
+      - v6.2.10-45
     path: redis
   - git:
       commitTitle: Update marketplace.json

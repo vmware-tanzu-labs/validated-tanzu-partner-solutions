@@ -22,14 +22,14 @@ spec:
   redisEnterpriseImageSpec:
     imagePullPolicy: IfNotPresent
     repository:      redislabs/redis
-    versionTag:      6.2.10-90
+    versionTag:      6.2.10-129
   redisEnterpriseServicesRiggerImageSpec:
     imagePullPolicy: IfNotPresent
     repository:      redislabs/k8s-controller
-    versionTag:      6.2.10-4
+    versionTag:      6.2.10-45
   bootstrapperImageSpec:
     imagePullPolicy: IfNotPresent
     repository:      redislabs/operator
-    versionTag:      6.2.10-4
+    versionTag:      6.2.10-45
   uiServiceType: LoadBalancer
   username: #@ data.values.cluster.adminUsername

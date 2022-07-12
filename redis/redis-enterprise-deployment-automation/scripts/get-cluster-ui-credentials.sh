@@ -20,5 +20,5 @@ password=$(kubectl -n "${namespace}" get secret "${clusterName}" -o jsonpath='{.
 echo "${clusterName} Cluster UI:"
 echo "Username: ${username}"
 echo "Password: ${password}"
-ip=$(kubectl get svc redis-cluster-ui -n redis -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+ip=$(kubectl get svc "${clusterName}-ui" -n redis -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 echo "URL: https://${ip}:8443"

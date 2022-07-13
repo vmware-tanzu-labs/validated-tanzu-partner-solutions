@@ -97,4 +97,29 @@ kubectl proxy --port=8080
 
 Open in a browser: http://localhost:8080/api/v1/namespaces/tekton-pipelines/services/tekton-dashboard:http/proxy/
 
-### On the Redis cluster
+## Access the Redis Cluster UI
+
+Target the redis cluster, get the credentials and access the UI
+
+```bash
+$ export KUBECONFIG=path/to/redis-kubeconfig.yaml
+$ ./scripts/get-cluster-ui-credentials.sh redis redis-cluster
+redis-cluster Cluster UI:
+Username: pwall@vmware.com
+Password: 56miPqIa
+URL: https://192.168.31.100:8443
+```
+
+## Deploying the RedisBank sample app
+
+```bash
+./scripts/deploy-redisbank-sample-app.sh redis my-redis-database
+```
+
+Now you can access the RedisBank app using the LoadBalancer external IP address:
+
+```bash
+$ kubectl get svc -n redis redisbank-deployment
+NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
+redisbank-deployment   LoadBalancer   100.65.35.223   192.168.31.103   8080:30491/TCP   26h
+```

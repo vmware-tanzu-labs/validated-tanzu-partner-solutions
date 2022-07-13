@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# This script deploys the Redisbank sample app
+# This script deploys the RedisBank sample app
+# https://github.com/redis-developer/redisbank
+#
+# The image was built using Cloud Native Buildpacks (https://buildpacks.io/) and running:
+# redisbank/ $ pack build --builder gcr.io/buildpacks/builder:v1 projects.registry.vmware.com/tanzu_isv_engineering/redisbank
+#
 # It is meant to be run manually, connected to the Redis cluster
 
 if [ -z "${1}" ] ; then
@@ -18,7 +23,7 @@ if [ ! -d vendor/redisbank ] ; then
     exit 1
 fi
 
-redisbankImage=harbor-repo.vmware.com/pwall/redisbank
+redisbankImage=projects.registry.vmware.com/tanzu_isv_engineering/redisbank
 kapp deploy --app redisbank \
     --into-ns "${namespace}" \
     --diff-changes \

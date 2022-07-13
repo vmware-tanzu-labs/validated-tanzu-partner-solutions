@@ -4,24 +4,17 @@
 # It is meant to be run manually, connected to the Redis cluster
 
 if [ -z "${1}" ] ; then
-    echo "USAGE: ${0} <values.yaml>" >&2
-    echo "values.yaml is a file containing the values for deploying the Redisbank sample application"
+    echo "USAGE: ${0} <namespace> <database-name>" >&2
+    echo "namespace     - The Kubernetes namespace where the Redis Enterprise Database is deployed"
+    echo "database-name - The name of the Redis Enterprise Database deployed to Kubernetes"
     exit 1
 fi
 
-if [ ! -f "${1}" ] ; then
-    echo "Error: ${1} is not a file. Please provide a valid values file." >&2
-    exit 1
-fi
+namespace=$1
+databaseName=$2
 
 if [ ! -d vendor/redisbank ] ; then
     echo "Error: redis directory missing. Please run 'vendir sync'." >&2
-    exit 1
-fi
-
-namespace=$(ytt --file "${1}" --data-values-inspect --output json | jq -r .namespace)
-if [ -z "${namespace}" ] ; then
-    echo "Error: namespace was not found in the values file" >&2
     exit 1
 fi
 
@@ -33,6 +26,6 @@ kapp deploy --app redisbank \
         -f vendor/redisbank/deploy-on-k8s.yaml \
         -f overlays/redisbank-sampleapp-image-overlay.yaml \
         -f overlays/redisbank-sampleapp-secret-name.yaml \
-        -f ${1} \
+        -v database.name="${databaseName}" \
         -v redisbankImage="${redisbankImage}") \
     --file deployment/redisbank-svc.yaml

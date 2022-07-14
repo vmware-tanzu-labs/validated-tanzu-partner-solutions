@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 # This script deploys the RedisBank sample app
 # https://github.com/redis-developer/redisbank
 #

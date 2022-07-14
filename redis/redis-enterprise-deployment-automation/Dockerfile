@@ -1,3 +1,6 @@
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 FROM ubuntu:20.04
 WORKDIR /automation
 

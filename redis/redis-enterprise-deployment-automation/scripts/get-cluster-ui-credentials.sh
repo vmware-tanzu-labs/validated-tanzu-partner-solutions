@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 # This script gets the credentials for the Redis Cluster UI
 # It is meant to be run manually, connected to the Redis cluster
 

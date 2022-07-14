@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 # This script deploys a secret with the SSH key required to pull the values repository
 # It is meant to be run manually, connected to the pipeline cluster
 

@@ -1,4 +1,6 @@
----
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 # This tells kapp how to wait until the cluster has been fully set up
 # Not yet available in kapp, waiting for this PR: https://github.com/vmware-tanzu/carvel-kapp/pull/475
 apiVersion: kapp.k14s.io/v1alpha1

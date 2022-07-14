@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 function usage() {
   echo "Usage: launch.sh [--create-cluster] [--deploy-dashboard] [<pipeline.yaml>,...]"
   echo ""

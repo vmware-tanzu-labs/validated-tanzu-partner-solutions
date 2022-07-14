@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 # This script deploys the Redis cluster
 # It is meant to be run from the pipeline
 

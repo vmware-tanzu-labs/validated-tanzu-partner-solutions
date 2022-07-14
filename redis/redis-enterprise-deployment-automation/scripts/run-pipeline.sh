@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 # This script deploys the Tekton pipeline to enable deployment automation for Redis
 # It is meant to be run manually, connected to the pipeline cluster
 
@@ -12,14 +15,14 @@ function usage() {
     exit 1
 }
 
-if [ -z "${1}" ] ; then
+if [ -z "${1}" ]; then
     echo "Error. Missing pipeline image. Please provide a valid pipeline image." >&2
-    usage()
+    usage
 fi
 
-if [ -z "${2}" ] ; then
+if [ -z "${2}" ]; then
     echo "Error. Missing values repository. Please provide a valid values repository path." >&2
-    usage()
+    usage
 fi
 
 ytt --file pipeline-run-template.yaml \

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 # This script creates a secret with the kubeconfig file to provide access to another cluster
 # It is meant to be run manually, connected to the pipeline cluster
 

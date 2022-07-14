@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
+
 # This script deploys the Tekton pipeline to enable deployment automation for Redis
 # It is meant to be run manually, connected to the pipeline cluster
 

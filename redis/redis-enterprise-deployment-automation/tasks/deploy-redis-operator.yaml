@@ -1,3 +1,5 @@
+# Copyright 2022 VMware, Inc.
+# SPDX-License-Identifier: MIT
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:

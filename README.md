@@ -11,3 +11,4 @@ as an open-source patch. For more detailed information, refer to [CONTRIBUTING.m
 
 ## License
 
+The content in this repository is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International Public License](LICENSE-CC-Attribution-ShareAlike4.0) or the [MIT License](LICENSE-MIT).

@@ -1,6 +1,7 @@
 # Redis Enterprise on Tanzu Reference Architecture
 
 By: Pete Wall, Staff Solutions Architect
+
 Last Updated: May 11th, 2022
 
 ## Architecture Overview

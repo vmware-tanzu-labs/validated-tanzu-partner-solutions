@@ -94,11 +94,14 @@ _Architecture diagram of Redis Enterprise on VMware Tanzu Kubernetes Grid on vSp
 
 Redis Enterprise databases have multiple methods for backup and recovery.
 
-#### Persistence
+#### HA and Persistence
 
-First and simplest is to enable persistence in the Redis Enterprise Cluster, and allow the storage layer to manage the data. If the database needs to be re-created, the new database can be reconnected to the existing PersistentVolume and then the data can be recovered by following [these steps](https://docs.redis.com/latest/kubernetes/re-clusters/cluster-recovery/).
+From a performance perspective, it is always preferred to failover from a primary database shard to an in-memory synchronized secondary database shard, and this is how Redis Enterprise works; only when the primary and secondary shards are lost is the database restored from disk. Similarly, in the case of a datacenter failure, failing over to a synchronized active-active database in another data center will be faster than recovering from disk.
+
+To this end, enable replication to add a seconary shard for every primary shard and enable persistence in the Redis Enterprise database which will allow the storage layer to manage the data. If both the primary and secondary shards are lost, they will recover from the existing PersistentVolume. If the majority of primary and secondary shards are lost, the database needs to be re-created from the existing PersistentVolume. If the majority of Redis Enterprise node-pods are lost, the cluster can be reconnected to the existing PersistentVolume and then the data can be recovered by following [these steps](https://docs.redis.com/latest/kubernetes/re-clusters/cluster-recovery/).
 
 #### Redis Backups
+
 Second, the Redis Enterprise Database spec allows for scheduling of periodic backups to various filestores:
 
 * Filesystem mount path (e.g. made available to the cluster via Kubernetes volumes)
